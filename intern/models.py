@@ -31,7 +31,7 @@ class Task(models.Model):
 
 class Attendence(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now) 
+    date = models.DateField(default=timezone.now) 
 
     class Meta:
         constraints=[
