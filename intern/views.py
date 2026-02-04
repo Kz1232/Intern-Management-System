@@ -53,7 +53,7 @@ class TaskViewSet(GenericViewSet):
   
 
     def get_permissions(self):
-        if self.action in ("create",'update','partial_update', "destroy",):
+        if self.action in ("create",'update','partial_update', "destroy","soft_delete","restore"):
             self.permission_classes = [IsSupervisor,IsAuthenticated]
         return [permission() for permission in self.permission_classes]
 
@@ -93,6 +93,19 @@ class TaskViewSet(GenericViewSet):
         task.delete()
         return Response({"message": "Task Deleted Successfully"}, status=status.HTTP_200_OK)
     
+    @action(detail=True, methods=['patch'])
+    def soft_delete(self, request, pk=None):
+        task = self.get_object()
+        task.soft_delete()
+        return Response({"message": "Task Soft Deleted Successfully"}, status=status.HTTP_200_OK)   
+
+    @action(detail=True, methods=['post'])
+    def restore(self, request, pk=None):
+        task = Task.everything.get(id=pk)
+        task.restore()
+        return Response({"message": "Task Restored Successfully"}, status=status.HTTP_200_OK)
+
+
     @action(detail=True, methods=['post'])
     def complete(self, request, pk=None):
         task = Task.objects.get(id=pk)
