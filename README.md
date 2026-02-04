@@ -140,6 +140,8 @@ Common routes:
 - `PUT/PATCH /app/tasks/{id}/` (update; supervisor-only)
 - `DELETE /app/tasks/{id}/` (delete; supervisor-only)
 - `POST /app/tasks/{id}/complete/` (complete; only assigned user)
+- `PATCH /app/tasks/{id}/soft_delete` (soft_delete: supervisor-only)
+- `POST /app/tasks/{id}/restore` (restore task: supervisor-only)
 
 ---
 
