@@ -15,7 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
-
+    env:
+      DJANGO_SETTINGS_MODULE: Project.production
+      SECRET: ${{ secrets.SECRET }}
+      WEBSITE_HOSTNAME: ${{ vars.WEBSITE_HOSTNAME }}
+      AZURE_POSTGRESQL_CONNECTIONSTRING: ${{ secrets.AZURE_POSTGRESQL_CONNECTIONSTRING }}
+    
     steps:
       - uses: actions/checkout@v4
 
