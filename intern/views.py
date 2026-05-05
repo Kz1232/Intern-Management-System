@@ -18,6 +18,13 @@ from django.contrib.auth import authenticate
 
 # Create your views here.
 
+@api_view(['GET'])
+def homepage(request):
+    return render(request, 'homepage.html')
+
+
+
+
 @api_view(['POST'])
 def user_register(request):
     payload = request.data

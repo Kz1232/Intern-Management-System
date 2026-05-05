@@ -46,5 +46,5 @@ urlpatterns = [
 
 
     path('admin/', admin.site.urls),
-    path('app/',include('intern.urls')),
+    path('',include('intern.urls')),
 ]

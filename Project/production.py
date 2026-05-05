@@ -26,9 +26,10 @@ DEBUG = False
 
 SECRET_KEY = get_env("SECRET")
 
-website_hostname = get_env("WEBSITE_HOSTNAME")
-allowed_hosts_value = os.environ.get("ALLOWED_HOSTS", website_hostname)
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_value.split(",") if host.strip()]
+# website_hostname = get_env("WEBSITE_HOSTNAME")
+# allowed_hosts_value = os.environ.get("ALLOWED_HOSTS", website_hostname)
+# ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_value.split(",") if host.strip()]
+ALLOWED_HOSTS = [ os.environ['WEBSITE_HOSTNAME']]
 CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -62,7 +63,7 @@ STORAGES = {
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-connection_string = get_env("AZURE_POSTGRESQL_CONNECTIONSTRING")
+connection_string = os.environ["AZURE_POSTGRESQL_CONNECTIONSTRING"]
 parameters = parse_azure_postgres_connection_string(connection_string)
 
 database_name = parameters.get("dbname") or parameters.get("database") or parameters.get("name")

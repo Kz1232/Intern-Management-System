@@ -13,6 +13,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: demo
     permissions:
       contents: read #This is required for actions/checkout
     env:
@@ -23,7 +24,6 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Python version
         uses: actions/setup-python@v5
         with:
@@ -47,11 +47,6 @@ jobs:
             .
             !antenv/
 
-      # 🚫 Opting Out of Oryx Build
-      # If you prefer to disable the Oryx build process during deployment, follow these steps:
-      # 1. Remove the SCM_DO_BUILD_DURING_DEPLOYMENT app setting from your Azure App Service Environment variables.
-      # 2. Refer to sample workflows for alternative deployment strategies: https://github.com/Azure/actions-workflow-samples/tree/master/AppService
-      
 
   deploy:
     runs-on: ubuntu-latest

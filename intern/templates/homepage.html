@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intern Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    header {
+      background: #4f46e5;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .hero {
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: linear-gradient(to right, #eef2ff, #ffffff);
+    }
+
+    .hero-text {
+      max-width: 50%;
+    }
+
+    .hero-text h2 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    .hero-text p {
+      margin-bottom: 20px;
+      color: #4b5563;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #4f46e5;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .btn-secondary {
+      background: #e0e7ff;
+      color: #4f46e5;
+    }
+
+    .features {
+      padding: 60px 40px;
+      background: #f9fafb;
+      text-align: center;
+    }
+
+    .features h3 {
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .feature {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .feature h4 {
+      margin-bottom: 10px;
+    }
+
+    .cta {
+      padding: 60px 40px;
+      text-align: center;
+      background: #4f46e5;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111827;
+      color: white;
+    }
+
+    @media(max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-text {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>InternSys</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h2>Manage Interns Efficiently</h2>
+      <p>Streamline onboarding, track progress, and manage intern performance all in one place.</p>
+      <a href="#" class="btn">Get Started</a>
+      <a href="#" class="btn btn-secondary">Learn More</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://via.placeholder.com/500" alt="Intern Management" style="width:100%; border-radius:10px;">
+    </div>
+  </section>
+
+  <section class="features">
+    <h3>Key Features</h3>
+    <div class="feature-grid">
+      <div class="feature">
+        <h4>Intern Tracking</h4>
+        <p>Monitor intern progress and attendance easily.</p>
+      </div>
+      <div class="feature">
+        <h4>Task Management</h4>
+        <p>Assign and track tasks with real-time updates.</p>
+      </div>
+      <div class="feature">
+        <h4>Performance Reports</h4>
+        <p>Generate detailed performance analytics.</p>
+      </div>
+      <div class="feature">
+        <h4>Communication</h4>
+        <p>Seamless communication between interns and mentors.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h3>Ready to Simplify Intern Management?</h3>
+    <p>Join now and transform how you manage interns.</p>
+    <a href="#" class="btn">Sign Up</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 InternSys. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
