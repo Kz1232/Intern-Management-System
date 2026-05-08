@@ -11,10 +11,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    assigned_to = serializers.SlugRelatedField(
-        slug_field='username',
-        queryset=User.objects.all()
-    )
+    assigned_to = serializers.StringRelatedField(read_only=True)
+
     class Meta:
-        model = Task 
-        fields=['title','assigned_to','status','created_at','completed_at']
+        model = Task
+        fields = ['id','assigned_to' ,'title', 'status', 'created_at','completed_at']
+        
+
+class TaskListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ['id','title','status','created_at', 'completed_at']
+        read_only_fields = ['created_at', 'completed_at']

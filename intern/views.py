@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .serializers import UserProfileSerializer, TaskSerializer
+from .serializers import UserProfileSerializer, TaskSerializer , TaskListSerializer
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from rest_framework.response import Response
@@ -8,7 +8,8 @@ from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-
+from drf_yasg.utils  import swagger_auto_schema
+from drf_yasg import openapi
 
 from .models import Task, UserProfile, Attendence
 from .permissions import IsSupervisor
@@ -51,22 +52,39 @@ class TaskViewSet(GenericViewSet):
     serializer_class = TaskSerializer
     permission_classes=[IsAuthenticated]
 
-    filterset_fields =["assigned_to__username",'status'] # /tasks/?assigned_to=1
+    filterset_fields =['status'] # /tasks/?assigned_to=1
     # filterset_fields = {
     #     "assigned_to__username": ["exact", "icontains"],
     # }
     search_fields = ["title", "assigned_to__username"]  # /tasks/?search=alice
     ordering_fields = ["created_at"]  # /tasks/?ordering=-created_at
-  
+    
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return TaskListSerializer
+        return TaskSerializer
+    def get_queryset(self):
+        # Admin users can see all logs, regular users see only their own
+        if self.request.user.is_superuser:
+            return Task.objects.all().order_by("-created_at")
+        return Task.objects.filter(assigned_to=self.request.user.id).order_by(
+            "-created_at"
+        )
 
     def get_permissions(self):
         if self.action in ("create",'update','partial_update', "destroy","soft_delete","restore"):
             self.permission_classes = [IsSupervisor,IsAuthenticated]
         return [permission() for permission in self.permission_classes]
 
+    def perform_create(self,serializer):
+        serializer.save(assigned_to = self.request.user.id)
+    
+    @swagger_auto_schema(
+        operation_description="This is to get task list assigned to user",
+        responses={200: TaskListSerializer(many=True)},
+    )
     def list(self, request):
         qs = self.filter_queryset(self.get_queryset())
-
         page = self.paginate_queryset(qs)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
